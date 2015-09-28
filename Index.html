@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DRAGON SLAYER</title>
+</head>
+<body>
+<button type="button" onclick="funcBeforeStart()">FIGHT DRAGON</button>
+<script>
+    var slaying = true;
+    var youHit = Math.floor(Math.random()*2);
+    var damageThisRound = Math.floor(Math.random()*15 + 1);
+    var totalDamage = 0;
+    //when you click the button...
+    function funcBeforeStart() {
+        //resets variables whenever you click the button so every time you click the button you play the game again without refreshing the page
+        totalDamage = 0;
+        slaying = true;
+        youHit = Math.floor(Math.random()*2);
+        damageThisRound = Math.floor(Math.random()*15 + 1);
+        //runs the other function
+        funcStart()
+    }
+    function funcStart() {
+        slaying = true;
+        while(slaying) {
+            if (youHit == 1) {
+                //if you hit, the following happens...
+                confirm("You hit the Dragon!");
+                totalDamage = totalDamage + damageThisRound;
+                if (totalDamage >= 20) {
+                    confirm("You have defeated the Dragon!");
+                    slaying = false;
+                }
+                else {
+                    youHit = Math.floor(Math.random()*2);
+                    damageThisRound = Math.floor(Math.random()*15 + 1);
+                    //(2 previous lines) randomizing variables again for next hit
+                    funcStart();
+                    //(previous line)while loop doesn't work because it's in a function, so I reran the function at the end
+                }
+            }
+            else {
+                //if you don't hit
+                confirm("The Dragon has defeated you!");
+            }
+            slaying = false;
+        }
+    }
+</script>
+</body>
+</html>
